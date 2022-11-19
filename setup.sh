@@ -20,7 +20,7 @@ setup()
     echo "Installing essential python modules"
     pip install virtualenv \
         bpython > /dev/null
-    if [ "$DOCKER" = "y" ]; then
+    if [ "${DOCKER:-n}" = "y" ]; then
         echo "Installing Docker"
         sudo apt-get install \
             ca-certificates \
