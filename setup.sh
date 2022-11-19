@@ -60,9 +60,13 @@ setup()
     echo "Setting up colorscripts"
     git clone https://gitlab.com/dwt1/shell-color-scripts.git
     cd shell-color-scripts
-    sudo make install
+    sudo make install >> /dev/null
     # optional for fish shell completion
     cp completions/colorscript.fish /usr/share/fish/vendor_completions.d
     echo "Adding colorscripts to fish"
     echo "colorscript -r" >>"${HOME}/.config/fish/config.fish"
 }
+
+echo -n "Do you want to install docker? (y/n): "
+read -r DOCKER
+setup
