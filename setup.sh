@@ -60,3 +60,4 @@ sudo make install
 # optional for fish shell completion
 cp completions/colorscript.fish /usr/share/fish/vendor_completions.d
 echo "Adding colorscripts to fish"
+echo "colorscript -r" >>"${HOME}/.config/fish/config.fish"
