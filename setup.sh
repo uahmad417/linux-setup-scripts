@@ -16,7 +16,7 @@ sudo apt-get install -y \
     build-essential
     curl > /dev/null
 echo "Installing essential python modules"
-pip install virtualenv \
+sudo pip install virtualenv \
     bpython > /dev/null
 echo -n "Do you want to install Docker Engine?(y/n): "
 read -r DOCKER
