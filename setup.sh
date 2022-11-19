@@ -52,7 +52,8 @@ fi
 echo "Setting up oh-my-fish shell prompt"
 echo "Installing fish"
 sudo apt-get install fish -y > /dev/null
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install
+fish install --noninteractive --yes 
 echo "omf install lambda" | fish > /dev/null
 echo "omf theme lambda" | fish > /dev/null
 echo "Setting fish as the default shell"
