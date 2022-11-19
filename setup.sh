@@ -53,18 +53,18 @@ setup()
     echo "Installing fish"
     sudo apt-get install fish > /dev/null
     curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-    echo "omf install lambda" | fish
-    echo "omf theme lambda" | fish
+    echo "omf install lambda" | fish > /dev/null
+    echo "omf theme lambda" | fish > /dev/null
     echo "Setting fish as the default shell"
     chsh -s /usr/bin/fish
     echo "Setting up colorscripts"
-    git clone https://gitlab.com/dwt1/shell-color-scripts.git
+    git clone https://gitlab.com/dwt1/shell-color-scripts.git > /dev/null
     cd shell-color-scripts
-    sudo make install >> /dev/null
+    sudo make install > /dev/null
     # optional for fish shell completion
     cp completions/colorscript.fish /usr/share/fish/vendor_completions.d
     echo "Adding colorscripts to fish"
-    echo "colorscript -r" >> "${HOME}/.config/fish/config.fish"
+    echo "colorscript -r" > "${HOME}/.config/fish/config.fish"
 }
 
 echo -n "Do you want to install docker? (y/n): "
