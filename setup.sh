@@ -41,13 +41,6 @@ if [ "${DOCKER:-n}" = "y" ]; then
     echo "Docker Installed"
     echo "Starting Docker Service"
     sudo service docker start
-    echo "Testing Docker"
-    sudo docker run hello-world > /dev/null
-    if [ $? -eq 0 ]; then
-        echo "Docker is working"
-    else
-        echo "Something went wrong with setting up Docker"
-    fi
 fi
 echo "Setting up oh-my-fish shell prompt"
 echo "Installing fish"
