@@ -46,3 +46,6 @@ else
 fi
 echo "Setting up oh-my-fish shell prompt"
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+echo "omf install lambda" | fish
+echo "omf theme lambda" | fish
+echo "Setting fish as the default shell"
