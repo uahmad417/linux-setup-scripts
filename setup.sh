@@ -26,8 +26,8 @@ if [ "${DOCKER:-n}" = "y" ]; then
         ca-certificates \
         curl \
         gnupg \
-        lsb-release > /dev/null
-    mkdir -p /etc/apt/keyrings
+        lsb-release -y > /dev/null
+    sudo mkdir -p /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
@@ -37,7 +37,7 @@ if [ "${DOCKER:-n}" = "y" ]; then
         docker-ce \
         docker-ce-cli \
         containerd.io \
-        docker-compose-plugin > /dev/null
+        docker-compose-plugin -y > /dev/null
     echo "Docker Installed"
     echo "Starting Docker Service"
     sudo service docker start
@@ -66,3 +66,4 @@ sudo make install > /dev/null
 sudo cp completions/colorscript.fish /usr/share/fish/vendor_completions.d
 echo "Adding colorscripts to fish"
 echo "colorscript -r" > "${HOME}/.config/fish/config.fish"
+echo "Your environment is all set!"
