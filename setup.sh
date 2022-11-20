@@ -58,6 +58,7 @@ setup ()
         echo "omf theme lambda" | fish > /dev/null
     fi
     if [ "${COLORSCRIPTS:-n}" = 'y' ]; then
+        sudo apt-get update && sudo apt-get install build-essential
         echo "Setting up colorscripts"
         git clone https://gitlab.com/dwt1/shell-color-scripts.git > /dev/null
         cd shell-color-scripts
