@@ -62,8 +62,7 @@ setup ()
         sudo make install > /dev/null
         # optional for fish shell completion
         #sudo cp completions/colorscript.fish /usr/share/fish/vendor_completions.d
-        # reading the default shell
-        if [ ${FISH:-n} = 'y' ]; then
+        if [ "${FISH:-n}" = 'y' ]; then
             echo "Adding colorscripts to fish"
             echo "colorscript -r" > "${HOME}/.config/fish/config.fish"
         else
