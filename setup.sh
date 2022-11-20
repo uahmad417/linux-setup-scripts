@@ -20,8 +20,6 @@ setup ()
     echo "Installing essential python modules"
     sudo pip install virtualenv \
         bpython > /dev/null
-    echo -n "Do you want to install Docker Engine?(y/n): "
-    read -r DOCKER
     if [ "${DOCKER:-n}" = "y" ]; then
         echo "Installing Docker"
         sudo apt-get install \
@@ -44,23 +42,35 @@ setup ()
         echo "Starting Docker Service"
         sudo service docker start
     fi
-    echo "Setting up oh-my-fish shell prompt"
-    echo "Installing fish"
-    sudo apt-get install fish -y > /dev/null
-    curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install
-    fish install --noninteractive --yes 
-    echo "omf install lambda" | fish > /dev/null
-    echo "omf theme lambda" | fish > /dev/null
-    echo "Setting fish as the default shell"
-    chsh -s /usr/bin/fish
-    echo "Setting up colorscripts"
-    git clone https://gitlab.com/dwt1/shell-color-scripts.git > /dev/null
-    cd shell-color-scripts
-    sudo make install > /dev/null
-    # optional for fish shell completion
-    sudo cp completions/colorscript.fish /usr/share/fish/vendor_completions.d
-    echo "Adding colorscripts to fish"
-    echo "colorscript -r" > "${HOME}/.config/fish/config.fish"
+    if [ "${FISH:-n}" = 'y' ]; then
+        echo "Installing fish"
+        sudo apt-get install fish -y > /dev/null
+        echo "Setting fish as the default shell"
+        chsh -s /usr/bin/fish
+    fi
+    if [ "${OMF:-n}" = 'y' ]; then
+        echo "Setting up oh-my-fish shell prompt"
+        curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install
+        fish install --noninteractive --yes 
+        echo "omf install lambda" | fish > /dev/null
+        echo "omf theme lambda" | fish > /dev/null
+    fi
+    if [ "${COLORSCRIPTS:-n}" = 'y' ]; then
+        echo "Setting up colorscripts"
+        git clone https://gitlab.com/dwt1/shell-color-scripts.git > /dev/null
+        cd shell-color-scripts
+        sudo make install > /dev/null
+        # optional for fish shell completion
+        #sudo cp completions/colorscript.fish /usr/share/fish/vendor_completions.d
+        # reading the default shell
+        if [ ${FISH:-n} = 'y' ]; then
+            echo "Adding colorscripts to fish"
+            echo "colorscript -r" > "${HOME}/.config/fish/config.fish"
+        else
+            echo "Adding colorscripts to bashrc"
+            echo "colorscript -r" > "${HOME}/.bashrc"
+        fi
+    fi
     echo "Your environment is all set!"
 }
 echo -n "Do you want to install Docker?(y/n): "
@@ -72,5 +82,5 @@ if [ "$FISH" = 'y' ]; then
     read -r OMF
 fi
 echo -n "Do you want to setup colorscripts and add to .rc?(y/n): "
-read colorscripts
+read COLORSCRIPTS
 setup
