@@ -3,23 +3,25 @@
 setup ()
 {    
     echo "Setting up your enivironment"
-    echo "Installing packages"
-    sudo apt-get update > /dev/null
-    sudo apt-get install -y \
-        vim \
-        python3 \
-        python3-pip \
-        git \
-        tmux \
-        ranger \
-        net-tools \
-        iputils-ping \
-        traceroute \
-        build-essential
-        curl > /dev/null
-    echo "Installing essential python modules"
-    sudo pip install virtualenv \
-        bpython > /dev/null
+    if [ "${PACKAGES:-n}" = 'y' ]; then
+        echo "Installing essential packages"
+        sudo apt-get update > /dev/null
+        sudo apt-get install -y \
+            vim \
+            python3 \
+            python3-pip \
+            git \
+            tmux \
+            ranger \
+            net-tools \
+            iputils-ping \
+            traceroute \
+            build-essential
+            curl > /dev/null
+        echo "Installing essential python modules"
+        sudo pip install virtualenv \
+            bpython > /dev/null
+    fi
     if [ "${DOCKER:-n}" = "y" ]; then
         echo "Installing Docker"
         sudo apt-get install \
@@ -72,6 +74,8 @@ setup ()
     fi
     echo "Your environment is all set!"
 }
+echo -n "Do you want to install essential packages?(y/n): "
+read PACKAGES
 echo -n "Do you want to install Docker?(y/n): "
 read -r DOCKER
 echo -n "Do you want to install fish?(y/n): "
