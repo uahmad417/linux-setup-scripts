@@ -45,8 +45,8 @@ setup ()
         sudo service docker start
     fi
     if [ "${FISH:-n}" = 'y' ]; then
+        sudo apt-get update && sudo apt-get install fish -y > /dev/null
         echo "Installing fish"
-        sudo apt-get install fish -y > /dev/null
         echo "Setting fish as the default shell"
         chsh -s /usr/bin/fish
     fi
