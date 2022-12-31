@@ -48,7 +48,18 @@ setup ()
         sudo apt-get update && sudo apt-get install fish -y > /dev/null
         echo "Installing fish"
         echo "Setting fish as the default shell"
-        chsh -s /usr/bin/fish
+        redo=1 # this variable is used as a check if password entered is incorrect
+        # This loop checks if the password entered was correct
+        while [ $redo -ne 0 ]
+        do
+            chsh -s /usr/bin/fish
+            redo=$?
+            if [ $redo -ne 0 ]; then
+                echo "Incorrect Password! Try Again"
+            else
+                echo "Default shell changed successfully"
+            fi
+        done
     fi
     if [ "${OMF:-n}" = 'y' ]; then
         echo "Setting up oh-my-fish shell prompt"
